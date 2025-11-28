@@ -8,4 +8,8 @@ LangChain, Pinecone, Streamlit
 
 ### How to run: 
 
+pip install -r requirements.txt
+
+Create .env file with PINECONE_API_KEY,GROQ_API_KEY
+
 streamlit run app.py
