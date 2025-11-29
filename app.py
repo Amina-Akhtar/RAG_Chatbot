@@ -1,21 +1,16 @@
-import os
-from dotenv import load_dotenv
 import streamlit as st
 from src.embeddings import *
-from src.generator import generate_response, qa_chain
 from src.loader import load_document, upload_document, split_document
-
-load_dotenv()
-GROQ_API_KEY=os.environ.get('GROQ_API_KEY')
-os.environ["GROQ_API_KEY"]=GROQ_API_KEY
+from src.langgraph_agent import ChatAgent  
 
 if 'uploaded_file' not in st.session_state:
     st.session_state.uploaded_file = None
     st.session_state.embedding_upload=False
 if 'conversation_history' not in st.session_state:
     st.session_state.conversation_history = []
-
-st.title("RAG Chatbot")
+if 'agent' not in st.session_state:
+        st.session_state.agent = ChatAgent()
+st.title("cRAG Chatbot")
 st.write("Upload a PDF file to start chat")
 uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"], label_visibility="collapsed")
 
@@ -24,11 +19,10 @@ if uploaded_file is not None and uploaded_file != st.session_state.uploaded_file
     upload_document(uploaded_file)
     document = load_document("PDF/" + uploaded_file.name)
     chunks=split_document(document)
-    st.session_state.embedding_upload=False    
+    st.session_state.embedding_upload=False   
     if not st.session_state.embedding_upload:
         #store embeddings
         store_embeddings(chunks)
-        qa_chain.retriever = retrieve_embeddings()
         st.session_state.embedding_upload=True
     
 elif st.session_state.uploaded_file is not None and uploaded_file is None:
@@ -57,7 +51,7 @@ if user_input := st.chat_input("Type your message..."):
         st.info(response)
     else:
         with st.spinner("Thinking"):
-         response = generate_response(user_input, st.session_state.conversation_history)
+         response = st.session_state.agent.run(user_input)
          with st.chat_message("assistant"):
           st.markdown(response)
     st.session_state.conversation_history.append({"role": "assistant", "content": response})

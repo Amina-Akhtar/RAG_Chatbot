@@ -18,7 +18,7 @@ def load_document(doc_path):
 
 def split_document(document):
     split = RecursiveCharacterTextSplitter(chunk_size=500,chunk_overlap=100)
-    # convert text into list of Document
+    # convert pdf text into list of Document
     docs = [Document(page_content=document)]
     text = split.split_documents(docs)
     #texts = [t.page_content for t in text]
