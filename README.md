@@ -1,15 +1,17 @@
 # RAG-Chatbot
 
-A Retrieval-Augmented Generation based chatbot that allows users upload PDF and chat with its content. It uses langchain memory to maintain conversational context and provide context-aware responses.
+A Corrective Retrieval-Augmented Generation-cRAG chatbot that allows users to chat with the content of uploaded pdf. It provides context-aware responses using LangChain memory. It also performs web search to answer user queries when context is insufficient.
 
-### Technologies Used: 
+For better understanding, see D:\Projects\RAG-Chatbot\src\agent.png
 
-LangChain, Pinecone, Streamlit 
+## Technologies Used: 
 
-### How to run: 
+LangChain, LangGraph, Pinecone, Streamlit
+
+## How to run: 
 
 pip install -r requirements.txt
 
-Create .env file with PINECONE_API_KEY,GROQ_API_KEY
+Create .env file with PINECONE_API_KEY, GROQ_API_KEY, TAVILY_API_KEY
 
 streamlit run app.py

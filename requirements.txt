@@ -5,6 +5,10 @@ langchain-pinecone
 langchain_community
 langchain_experimental
 langchain_groq
+langchain-huggingface
+langchain-tavily
+langgraph
+pydantic
 python-dotenv
 streamlit
 PyPDF2
