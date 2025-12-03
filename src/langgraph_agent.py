@@ -89,7 +89,7 @@ class ChatAgent:
         history = self.memory.load_memory_variables({})["history"]
         context = "\n".join([d.page_content for d in documents])
         generate_prompt=f"""You are an expert assistant for question-answering tasks. 
-        Use the following pieces of retrieved context and chat history to answer the question. 
+        Use the following pieces of retrieved context and chat history (if available) to answer the question. 
         Question:{question}
         Context:{context}
         History:{history} 
@@ -115,7 +115,7 @@ class ChatAgent:
          response = self.llm_evaluator.invoke(evaluate_prompt)
          if response.binary_score.lower() == "yes": # document relevant
             filtered_docs.append(d)
-       if len(documents) > 0 and (len(filtered_docs) / len(documents) <= 0.7):
+       if len(documents) > 0 and (len(filtered_docs) / len(documents) <= 0.6):
           web_search = "Yes"
        state["web_search"]=web_search
        state["documents"]=filtered_docs
