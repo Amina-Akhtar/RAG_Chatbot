@@ -159,5 +159,10 @@ class ChatAgent:
           }
         result= self.app.invoke(initial_state)
         return result["answer"]
+        # return result
         
 # python -m src.langgraph_agent
+# ensure there are embeddings in vector store
+# agent=ChatAgent()
+# response = agent.run("What is the architecture of efficient net b0")
+# print(response)
