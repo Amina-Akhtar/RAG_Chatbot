@@ -2,7 +2,7 @@
 
 A Corrective Retrieval-Augmented Generation-cRAG chatbot that allows users to chat with the content of uploaded pdf. It provides context-aware responses using LangChain memory. It also performs web search to answer user queries when retrieved context is insufficient.
 
-For agent workflow, see [src/agent.png]
+For agent workflow, see [LangGraph Agent](src/agent.png)
 
 
 ## Technologies Used: 
