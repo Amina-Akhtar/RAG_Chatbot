@@ -1,4 +1,5 @@
 .env
 src/__pycache__/
 PDF/
-FineTuning/Llama-3.2-Classifier
+.ipynb_checkpoints/
+FineTuning/Llama-3.2-Classifier/
